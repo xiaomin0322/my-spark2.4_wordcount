@@ -18,8 +18,11 @@ public class SparkSqlSedona {
 		// 注册 SedonaSQL 函数
 		SedonaSQLRegistrator.registerAll(spark);
 
-		Dataset<Row> rawDf = spark.read().format("csv").option("delimiter", "\t").option("header", "false")
-				.load("data/checkin2.tsv");
+		Dataset<Row> rawDf = spark.read().format("csv")
+			    .option("header", "true")  // 指定第一行作为列名
+			    .option("inferSchema", "true")  // 推断列的数据类型
+			    .option("delimiter", ",")  // 指定列分隔符，默认为逗号
+				.load("data/geo.csv");//文件位置
 		
 		
 		rawDf.createOrReplaceTempView("rawdf");
@@ -28,10 +31,10 @@ public class SparkSqlSedona {
 		
 		spark.sql("DESCRIBE rawdf").show();
 		
-		spark.sql("DESCRIBE rawdf _c0").show();
+		spark.sql("DESCRIBE rawdf polygon").show();
 
 		// 将字符串类型的字段转换为 Sedona 的 Geometry 类型
-		Dataset<Row> result = spark.sql("SELECT ST_GeomFromWKT(_c0) AS geo FROM rawdf ");
+		Dataset<Row> result = spark.sql("SELECT ST_GeomFromWKT(regexp_replace(polygon, '\"', '')) AS geo FROM rawdf ");
 		
 		result.createOrReplaceTempView("test");
 		// 显示查询结果
