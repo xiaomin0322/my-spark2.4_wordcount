@@ -49,6 +49,11 @@ public class SparkSqlSedona {
 		// 经纬度是否在一个多边形内
 		result = spark.sql("SELECT ST_Contains(geo,ST_Point(13515248.838162526,3654281.857425429)) AS ST_Contains FROM test");
 		result.show();
+		
+		//经纬度是否在一个多边形内条件查询
+		result = spark.sql("SELECT  *  FROM test where ST_Contains(geo,ST_Point(13515248.838162526,3654281.857425429)) = true");
+		result.show();
+		
 
 		// 停止 SparkContext
 		spark.stop();
