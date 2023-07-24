@@ -6,7 +6,7 @@ import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 import org.datasyslab.geosparksql.utils.GeoSparkSQLRegistrator;
 
-public class SparkSqlGEOColonyTest {
+public class SparkSqlSedonaColonyTest {
 	public static void main(String[] args) {
 		// 创建 SparkConf 对象
 		SparkConf conf = new SparkConf().setAppName("SparkSqlGEOColonyTest");
@@ -30,8 +30,7 @@ public class SparkSqlGEOColonyTest {
 				"   FROM ddp_pro_ods.KIWI_TRADEZONEELEMENT_2 t " + 
 				"   where t.pg is not null " + 
 				"   and  t.pg1 is not null" + 
-				//geopsark不支持这个函数
-				//"   and  ST_IsClosed(ST_GeomFromText(t.pg1))" + 
+				"   and  ST_IsClosed(ST_GeomFromText(t.pg1))" + 
 				"   ) AS t ON t.mysite_objid = m.objid" + 
 				" WHERE 1=1  " + 
 				"  and t.pg is not null and o.longitude is not null and o.latitude is not null" + 
