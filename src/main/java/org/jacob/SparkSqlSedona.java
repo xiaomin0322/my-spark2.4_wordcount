@@ -1,16 +1,10 @@
 package org.jacob;
 
-import java.text.ParseException;
-
 import org.apache.sedona.sql.utils.SedonaSQLRegistrator;
 import org.apache.spark.SparkConf;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
-import org.apache.spark.sql.api.java.UDF1;
-import org.apache.spark.sql.types.DataTypes;
-
-import com.vividsolutions.jts.geom.Geometry;
 
 /**
  * 多边形没有关闭的异常
