@@ -15,6 +15,9 @@ public class SparkSqlSedonaColonyTest {
 		// 注册 SedonaSQLRegistrator 函数
 		SedonaSQLRegistrator.registerAll(spark);
 		
+		// 获取限制值
+		int limitValue = Integer.parseInt(conf.get("spark.limit", "200")); // 默认值为 200
+		
 		String sql  = "SELECT *" + 
 				" FROM ("+ 
 				" SELECT * " + 
@@ -34,7 +37,7 @@ public class SparkSqlSedonaColonyTest {
 				"   ) AS t ON t.mysite_objid = m.objid" + 
 				" WHERE 1=1  " + 
 				"  and t.pg is not null and o.longitude is not null and o.latitude is not null" + 
-				"  and st_contains(t.pg,st_point(cast(o.longitude as decimal(15,2)), cast(o.latitude  as decimal(15,2)))) = true limit 200";
+				"  and st_contains(t.pg,st_point(cast(o.longitude as decimal(15,2)), cast(o.latitude  as decimal(15,2)))) = true limit "+limitValue;
 		
 		// 执行地理空间查询
 		Dataset<Row> result = spark.sql(
