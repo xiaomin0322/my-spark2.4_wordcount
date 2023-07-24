@@ -22,11 +22,11 @@ public class SparkSqlSedonaColonyTest {
 				" WHERE 1=1 " + 
 				" ) AS o" + 
 				" LEFT JOIN (   " + 
-				"   SELECT m.pos_code,  objid " + 
+				"   SELECT m.pos_code,  m.objid" + 
 				"   FROM ddp_pro_ods.KIWI_MYSITE m  " + 
 				" ) AS m ON m.pos_code = o.StoreId" + 
 				" LEFT JOIN (" + 
-				"   SELECT t.mysite_objid, ST_GeomFromWKT(t.pg) as pg" + 
+				"   SELECT t.objid AS radezoneelement_objid,t.mysite_objid, ST_GeomFromWKT(t.pg) as pg" + 
 				"   FROM ddp_pro_ods.KIWI_TRADEZONEELEMENT_2 t " + 
 				"   where t.pg is not null " + 
 				"   and  t.pg1 is not null" + 
