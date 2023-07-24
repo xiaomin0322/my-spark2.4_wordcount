@@ -1,10 +1,10 @@
 package org.jacob;
 
+import org.apache.sedona.sql.utils.SedonaSQLRegistrator;
 import org.apache.spark.SparkConf;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
-import org.datasyslab.geosparksql.utils.GeoSparkSQLRegistrator;
 
 public class SparkSqlSedonaColonyTest {
 	public static void main(String[] args) {
@@ -12,8 +12,8 @@ public class SparkSqlSedonaColonyTest {
 		SparkConf conf = new SparkConf().setAppName("SparkSqlGEOColonyTest");
 		// 创建 SparkSession
 		SparkSession spark = SparkSession.builder().config(conf).enableHiveSupport().getOrCreate();
-		// 注册 GeoSparkSQL 函数
-		GeoSparkSQLRegistrator.registerAll(spark);
+		// 注册 SedonaSQLRegistrator 函数
+		SedonaSQLRegistrator.registerAll(spark);
 		
 		String sql  = "SELECT *" + 
 				" FROM ("+ 
