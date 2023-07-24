@@ -9,7 +9,7 @@ import org.apache.spark.sql.SparkSession;
 public class SparkSqlSedonaColonyTest {
 	public static void main(String[] args) {
 		// 创建 SparkConf 对象
-		SparkConf conf = new SparkConf().setAppName("SparkSqlGEOColonyTest");
+		SparkConf conf = new SparkConf().setAppName("SparkSqlSedonaColonyTest");
 		// 创建 SparkSession
 		SparkSession spark = SparkSession.builder().config(conf).enableHiveSupport().getOrCreate();
 		// 注册 SedonaSQLRegistrator 函数
